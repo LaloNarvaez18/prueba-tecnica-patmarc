@@ -23,6 +23,9 @@ services:
     expose:
       - "9000"
     working_dir: /var/www/app
+    volumes:
+      - .:/var/www/app
+      - ./public/build:/var/www/app/public/build
     environment:
       - APP_URL=http://localhost:8000  # Muy importante
     entrypoint:
@@ -34,6 +37,7 @@ services:
         exec php-fpm
     depends_on:
       - mysql
+      - vite
     networks:
       - laravel
   vite:
@@ -42,9 +46,12 @@ services:
     working_dir: /var/www/app
     volumes:
       - .:/var/www/app
+      - ./public/build:/var/www/app/public/build
     ports:
       - "5173:5173"
     command: sh -c "npm install && npm run dev"
+    depends_on:
+      - mysql
     networks:
       - laravel
 
