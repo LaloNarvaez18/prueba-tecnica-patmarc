@@ -1,0 +1,91 @@
+{
+	"info": {
+		"_postman_id": "f4417d9e-6a3f-4e90-addd-3e88980eabeb",
+		"name": "Productos API",
+		"description": "API para obtener información sobre los productos disponibles. Esta API responde datos en formato JSON",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11431521"
+	},
+	"item": [
+		{
+			"name": "Listado de productos",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"products"
+					]
+				},
+				"description": "Este endpoint sirve para obtener el listado completo de productos disponibles"
+			},
+			"response": []
+		},
+		{
+			"name": "Producto por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/products/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"products",
+						"1"
+					]
+				},
+				"description": "Este endpoint sirve para obtener un producto en específico filtrado por ID"
+			},
+			"response": []
+		},
+		{
+			"name": "Productos por categorías",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/products/categories?names=Alimentos,Hogar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"products",
+						"categories"
+					],
+					"query": [
+						{
+							"key": "names",
+							"value": "Alimentos,Hogar"
+						}
+					]
+				},
+				"description": "Este endpoint sirve para obtener un listado de productos filtrados por nombres de una o más categorías separados por comas"
+			},
+			"response": []
+		}
+	]
+}
