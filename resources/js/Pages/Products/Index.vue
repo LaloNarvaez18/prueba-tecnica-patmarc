@@ -1,0 +1,93 @@
+<script setup>
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import { Head } from '@inertiajs/vue3';
+import Dropdown from '@/Components/Dropdown.vue';
+import DropdownLink from '@/Components/DropdownLink.vue';
+import Pagination from '@/Components/Pagination.vue';
+
+defineProps({
+    products: {
+        type: Object,
+        required: true,
+    },
+    categories: {
+        type: Object,
+        required: true,
+    },
+});
+</script>
+
+<template>
+    <AuthenticatedLayout>
+
+        <Head title="Productos" />
+
+        <div class="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+            <div class="mb-6 flex items-center justify-between">
+                <section>
+                    <h2 class="text-xl font-semibold text-gray-900">Productos</h2>
+                    <p class="text-sm text-gray-600">Listado de todos los productos</p>
+                </section>
+
+                <section class="flex items-center space-x-4">
+                    <a
+                        class="inline-block text-sm rounded-lg bg-indigo-500 py-2 px-6 text-white shadow-md transition duration-150 ease-in-out hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 text-center">
+                        <i class="bi bi-plus-lg"></i>
+                        Agregar producto
+                    </a>
+                </section>
+            </div>
+
+            <div class="overflow-hidden rounded-lg border shadow-md mb-5">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm text-gray-500">
+                        <thead class="bg-gray text-xs uppercase text-gray-700">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">ID</th>
+                                <th scope="col" class="px-6 py-3">Imagen</th>
+                                <th scope="col" class="px-6 py-3">Nombre</th>
+                                <th scope="col" class="px-6 py-3">Precio</th>
+                                <th scope="col" class="px-6 py-3">Stock</th>
+                                <th scope="col" class="px-6 py-3">Categoría(s)</th>
+                                <th scope="col" class="px-6 py-3">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white">
+                            <tr v-for="product in products.data" :key="product.id">
+                                <td class="px-6 py-4">{{ product.id }}</td>
+                                <td class="px-6 py-4">
+                                    <i class="bi bi-image text-xl text-gray-400"></i>
+                                </td>
+                                <td class="px-6 py-4">{{ product.name }}</td>
+                                <td class="px-6 py-4">{{ product.price }}</td>
+                                <td class="px-6 py-4">{{ product.stock }}</td>
+                                <td class="px-6 py-4">
+                                    <span v-for="category in product.categories" :key="category.id"
+                                        class="inline-flex items-center px-2 py-1 text-xs font-medium text-blue-800 bg-blue-100 rounded-full">
+                                        {{ category.name }}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <a :type="'button'"
+                                        class="inline-block px-3 py-1 mr-2 text-white bg-yellow-500 rounded hover:bg-yellow-600 transition-colors duration-200">
+                                        <i class="bi bi-pencil"></i>
+                                        Editar
+                                    </a>
+                                    <a :type="'button'"
+                                        class="inline-block px-3 py-1 mr-2 text-white bg-red-500 rounded hover:bg-red-600 transition-colors duration-200">
+                                        <i class="bi bi-trash3"></i>
+                                        Eliminar
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="overflow-hidden rounded-lg border shadow-md">
+                <Pagination :data="products" />
+            </div>
+        </div>
+    </AuthenticatedLayout>
+</template>

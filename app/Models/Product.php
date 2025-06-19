@@ -13,6 +13,8 @@ class Product extends Model
 
     protected $fillable = ['name', 'price'];
 
+    protected $with = ['categories'];
+
     public function categories() : BelongsToMany
     {
         return $this->belongsToMany(Category::class);
