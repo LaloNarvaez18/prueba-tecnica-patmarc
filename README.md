@@ -84,6 +84,15 @@ En esta sección se describe cómo levantar los servicios en local.
     ```sh
     php artisan serve --port=8000
     ```
+    
+## Uso
+
+Una vez que los servicios estén ejecutándose, ya sea en `Docker` o de forma local, accede en el navegador a la URL: http://localhost:8000 e inicia sesión con las siguientes credenciales:
+
+```sh
+Correo: admin@example.com
+Contraseña: password
+```
 
 ## Documentación API
 
