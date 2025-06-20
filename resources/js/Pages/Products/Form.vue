@@ -108,7 +108,7 @@ const toggleExpirationDateRequired = () => {
 
                             <div class="md:col-span-3">
                                 <InputLabel for="price" class="font-extrabold text-md mb-3">
-                                    <i class="bi bi-currency-dollar"></i> Precio
+                                    <i class="bi bi-currency-dollar"></i> Valor
                                 </InputLabel>
 
                                 <TextInput id="price" v-model="form.price" type="number" class="mt-1 block w-full"
@@ -144,7 +144,7 @@ const toggleExpirationDateRequired = () => {
                             <div class="md:col-span-6">
                                 <InputLabel for="expiration_date" class="font-extrabold text-md mb-3"
                                     dateFormat="yy-mm-dd">
-                                    <i class="bi bi-calendar"></i> Fecha de vencimiento
+                                    <i class="bi bi-calendar"></i> Fecha de expiración
                                 </InputLabel>
 
                                 <DatePicker v-model="form.expiration_date" inputId="expiration_date"

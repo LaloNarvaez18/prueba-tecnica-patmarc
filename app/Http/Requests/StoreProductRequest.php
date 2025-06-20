@@ -24,7 +24,7 @@ class StoreProductRequest extends FormRequest
         return [
             'name' => 'required|string|min:3|max:100',
             'description' => 'nullable|string|max:255',
-            'price' => 'required|numeric|min:10',
+            'price' => 'required|numeric|gt:0',
             'stock' => 'nullable|numeric|min:0',
             'categories' => 'required|array',
             'categories.*.id' => 'required|integer',
@@ -33,7 +33,7 @@ class StoreProductRequest extends FormRequest
                 'nullable',
                 'sometimes',
                 'date_format:Y-m-d\TH:i:s.v\Z',
-                'required_if:hasFoodCategory,true'
+                'required_if:foodCategorySelected,true'
             ],
         ];
     }
@@ -52,9 +52,9 @@ class StoreProductRequest extends FormRequest
             'name.max' => 'El nombre no debe exceder los 100 caracteres.',
             'description.string' => 'La descripción debe ser una cadena de texto.',
             'description.max' => 'La descripción no debe exceder los 255 caracteres.',
-            'price.required' => 'El precio es obligatorio.',
-            'price.numeric' => 'El precio debe ser un valor numérico.',
-            'price.min' => 'El precio debe ser al menos 10.',
+            'price.required' => 'El valor es obligatorio.',
+            'price.numeric' => 'El valor debe ser un valor numérico.',
+            'price.gt' => 'El valor debe ser mayor a 0.',
             'stock.numeric' => 'El stock debe ser un valor numérico.',
             'stock.min' => 'El stock no puede ser negativo.',
             'categories.required' => 'Debe seleccionar al menos una categoría.',
@@ -63,8 +63,8 @@ class StoreProductRequest extends FormRequest
             'categories.*.id.integer' => 'El ID de la categoría debe ser un número entero.',
             'categories.*.name.required' => 'El nombre de la categoría es obligatorio.',
             'categories.*.name.string' => 'El nombre de la categoría debe ser una cadena de texto.',
-            'expiration_date.date_format' => 'La fecha de vencimiento no tiene el formato esperado',
-            'expiration_date.required_if' => 'La fecha de vencimiento es obligatoria sí el producto es de tipo alimento.',
+            'expiration_date.date_format' => 'La fecha de expiración no tiene el formato esperado',
+            'expiration_date.required_if' => 'La fecha de expiración es obligatoria sí el producto es de tipo alimento.',
         ];
     }
 }
