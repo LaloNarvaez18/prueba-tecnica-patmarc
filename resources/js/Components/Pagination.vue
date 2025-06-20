@@ -2,19 +2,34 @@
 import { usePage } from '@inertiajs/vue3';
 import { router } from '@inertiajs/vue3';
 
-defineProps({
+const props = defineProps({
     data: {
         type: Object,
         required: true,
     },
+    routeName: {
+        type: String,
+        required: true,
+    },
+    extraParams: {
+        type: Object,
+        default: () => ({}),
+    }
 });
 
-const updatePage = (page) => {
-    let pageNumber = page.url.split("=")[1];
+const updatePage = (link) => {
+    if (!link.url) return;
 
-    router.visit(`?page=${pageNumber}`, {
-        preserveState: true,
+    const url = new URL(link.url, window.location.origin);
+    const params = Object.fromEntries(url.searchParams.entries());
+
+    router.get(route(props.routeName), {
+        ...params,
+        ...props.extraParams,
+    }, {
         preserveScroll: true,
+        preserveState: true,
+        replace: true,
     });
 };
 </script>

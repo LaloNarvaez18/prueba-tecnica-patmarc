@@ -100,7 +100,7 @@ const deleteCategory = () => {
             </div>
 
             <div class="overflow-hidden rounded-lg border shadow-md">
-                <Pagination :data="categories" />
+                <Pagination :data="categories" :routeName="'categories.index'" />
             </div>
         </div>
 

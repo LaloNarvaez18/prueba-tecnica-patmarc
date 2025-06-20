@@ -1,11 +1,12 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, useForm, usePage, } from '@inertiajs/vue3';
+import { Head, useForm, usePage, router } from '@inertiajs/vue3';
 import Pagination from '@/Components/Pagination.vue';
 import SessionMessage from '@/Components/SessionMessage.vue';
 import Modal from '@/Components/Modal.vue';
 import DeleteDialog from '@/Components/DeleteDialog.vue';
-import { ref } from 'vue';
+import MultiSelect from 'primevue/multiselect';
+import { ref, watch } from 'vue';
 
 const props = defineProps({
     products: {
@@ -19,11 +20,19 @@ const props = defineProps({
     message: {
         type: String,
     },
+    filters: {
+        type: Array
+    }
 });
 
-let message = usePage().props.flash.message;
-let showDialog = ref(false);
-let productToDelete = ref(false)
+const message = usePage().props.flash.message;
+const showDialog = ref(false);
+const productToDelete = ref(false);
+const selectedCategories = ref(
+    props.filters?.categories?.length
+        ? props.categories.data.filter(cat => props.filters.categories.includes(cat.id))
+        : []
+);
 
 const form = useForm({});
 
@@ -44,6 +53,16 @@ const deleteProduct = () => {
         }
     });
 }
+
+watch(selectedCategories, (newVal) => {
+    router.get(route('products.index'), {
+        categories: newVal.map(c => c.id),
+    }, {
+        preserveScroll: true,
+        preserveState: true,
+        replace: true,
+    });
+});
 </script>
 
 <template>
@@ -54,13 +73,18 @@ const deleteProduct = () => {
         <div class="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
             <SessionMessage :message="message" />
 
-            <div class="mb-6 flex items-center justify-between">
+            <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
                 <section>
                     <h2 class="text-xl font-semibold text-gray-900">Productos</h2>
                     <p class="text-sm text-gray-600">Listado de todos los productos</p>
                 </section>
 
-                <section class="flex items-center space-x-4">
+                <section
+                    class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
+                    <MultiSelect v-model="selectedCategories" name="filter" :options="categories.data"
+                        optionLabel="name" filter placeholder="Filtrar por categorias"
+                        class="w-full sm:w-auto md:w-60 flex-1 min-w-0" :maxSelectedLabels="2" />
+
                     <a :href="route('products.create')"
                         class="inline-block text-sm rounded-lg bg-indigo-500 py-2 px-6 text-white shadow-md transition duration-150 ease-in-out hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 text-center">
                         <i class="bi bi-plus-lg"></i>
@@ -117,7 +141,11 @@ const deleteProduct = () => {
             </div>
 
             <div class="overflow-hidden rounded-lg border shadow-md">
-                <Pagination :data="products" />
+                <Pagination
+                    :data="products"
+                    :routeName="'products.index'"
+                    :extraParams="{ categories: selectedCategories.map(c => c.id) }"
+                />
             </div>
         </div>
 

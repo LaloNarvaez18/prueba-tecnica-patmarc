@@ -16,14 +16,26 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = ProductResource::collection(Product::paginate(10));
+        $categoryIds = $request->input('categories', []);
+        $query = Product::query();
+
+        if (!empty($categoryIds)) {
+            $query->whereHas('categories', function ($q) use ($categoryIds) {
+                $q->whereIn('categories.id', $categoryIds);
+            });
+        }
+
+        $products = ProductResource::collection($query->paginate(10)->withQueryString());
         $categories = CategoryResource::collection(Category::all());
 
         return inertia('Products/Index', [
             'products' => $products,
             'categories' => $categories,
+            'filters' => [
+                'categories' => $categoryIds, // para mantener selección al volver
+            ],
         ]);
     }
 
