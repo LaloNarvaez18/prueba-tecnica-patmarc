@@ -12,7 +12,7 @@ use App\Http\Requests\StoreProductRequest;
 class ProductController extends Controller
 {
     /**
-     * Display a listing of the products.
+    * Muestra una lista de los productos.
      *
      * @return \Illuminate\Http\Response
      */
@@ -24,12 +24,11 @@ class ProductController extends Controller
         return inertia('Products/Index', [
             'products' => $products,
             'categories' => $categories,
-            'message' => session('message')
         ]);
     }
 
     /**
-     * Show the form for creating a new product.
+    * Muestra el formulario para crear un nuevo producto.
      *
      * @return \Illuminate\Http\Response
      */
@@ -43,7 +42,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Store a newly created product in storage.
+    * Almacena un nuevo producto en la base de datos.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -62,18 +61,18 @@ class ProductController extends Controller
     }
 
     /**
-     * Display the specified product.
+    * Muestra el producto especificado.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id)
     {
         // TO-DO
     }
 
     /**
-     * Show the form for editing the specified product.
+    * Muestra el formulario para editar el producto especificado.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -90,13 +89,13 @@ class ProductController extends Controller
     }
 
     /**
-     * Update the specified product in storage.
+    * Actualiza el producto especificado en la base de datos.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreProductRequest $request, $id)
+    public function update(StoreProductRequest $request, int $id)
     {
         $product = Product::findOrFail($id);
         $product->update($request->validated());
@@ -111,13 +110,18 @@ class ProductController extends Controller
     }
 
     /**
-     * Remove the specified product from storage.
+    * Elimina el producto especificado de la base de datos.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
-        // TO-DO
+        $product = Product::findOrFail($id);
+        $product->categories()->detach();
+        $product->delete();
+
+        return redirect()->route('products.index')
+            ->with('message', 'Producto eliminado exitosamente.');
     }
 }

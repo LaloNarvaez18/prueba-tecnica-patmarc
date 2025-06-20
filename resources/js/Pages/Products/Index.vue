@@ -1,10 +1,13 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, useForm, usePage, } from '@inertiajs/vue3';
 import Pagination from '@/Components/Pagination.vue';
 import SessionMessage from '@/Components/SessionMessage.vue';
+import Modal from '@/Components/Modal.vue';
+import DeleteDialog from '@/Components/DeleteDialog.vue';
+import { ref } from 'vue';
 
-defineProps({
+const props = defineProps({
     products: {
         type: Object,
         required: true,
@@ -17,6 +20,30 @@ defineProps({
         type: String,
     },
 });
+
+let message = usePage().props.flash.message;
+let showDialog = ref(false);
+let productToDelete = ref(false)
+
+const form = useForm({});
+
+const confirmDelete = (productId) => {
+    showDialog.value = true;
+    productToDelete.value = productId;
+}
+
+const closeDialog = () => {
+    showDialog.value = false;
+}
+
+const deleteProduct = () => {
+    form.delete(route('products.destroy', productToDelete.value), {
+        onSuccess: () => {
+            showDialog.value = false;
+            productToDelete.value = false;
+        }
+    });
+}
 </script>
 
 <template>
@@ -77,7 +104,7 @@ defineProps({
                                         <i class="bi bi-pencil"></i>
                                         Editar
                                     </a>
-                                    <a :type="'button'"
+                                    <a :type="'button'" @click="confirmDelete(product.id)"
                                         class="inline-block px-3 py-1 mr-2 text-white bg-red-500 rounded hover:bg-red-600 transition-colors duration-200">
                                         <i class="bi bi-trash3"></i>
                                         Eliminar
@@ -93,5 +120,18 @@ defineProps({
                 <Pagination :data="products" />
             </div>
         </div>
+
+        <Modal :show="showDialog" @close="closeDialog">
+            <DeleteDialog :title="'Eliminar producto'">
+                <a type="button" @click="deleteProduct"
+                    class="inline-flex w-full sm:w-auto justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:mr-3 mb-3 sm:mb-0">
+                    <i class="bi bi-trash mr-2"></i>Eliminar
+                </a>
+                <a type="button" @click="closeDialog"
+                    class="inline-flex w-full sm:w-auto justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50">
+                    <i class="bi bi-x-lg mr-2"></i>Cancelar
+                </a>
+            </DeleteDialog>
+        </Modal>
     </AuthenticatedLayout>
 </template>
