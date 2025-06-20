@@ -1,9 +1,8 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
-import Dropdown from '@/Components/Dropdown.vue';
-import DropdownLink from '@/Components/DropdownLink.vue';
 import Pagination from '@/Components/Pagination.vue';
+import SessionMessage from '@/Components/SessionMessage.vue';
 
 defineProps({
     products: {
@@ -14,6 +13,9 @@ defineProps({
         type: Object,
         required: true,
     },
+    message: {
+        type: String,
+    },
 });
 </script>
 
@@ -23,6 +25,8 @@ defineProps({
         <Head title="Productos" />
 
         <div class="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+            <SessionMessage :message="message" />
+
             <div class="mb-6 flex items-center justify-between">
                 <section>
                     <h2 class="text-xl font-semibold text-gray-900">Productos</h2>
@@ -30,7 +34,7 @@ defineProps({
                 </section>
 
                 <section class="flex items-center space-x-4">
-                    <a
+                    <a :href="route('products.create')"
                         class="inline-block text-sm rounded-lg bg-indigo-500 py-2 px-6 text-white shadow-md transition duration-150 ease-in-out hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 text-center">
                         <i class="bi bi-plus-lg"></i>
                         Agregar producto
@@ -68,7 +72,7 @@ defineProps({
                                     </span>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <a :type="'button'"
+                                    <a :type="'button'" :href="route('products.edit', product.id)"
                                         class="inline-block px-3 py-1 mr-2 text-white bg-yellow-500 rounded hover:bg-yellow-600 transition-colors duration-200">
                                         <i class="bi bi-pencil"></i>
                                         Editar

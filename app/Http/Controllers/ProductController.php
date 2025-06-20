@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Http\Resources\ProductResource;
 use App\Models\Category;
 use App\Http\Resources\CategoryResource;
+use App\Http\Requests\StoreProductRequest;
 
 class ProductController extends Controller
 {
@@ -20,10 +21,10 @@ class ProductController extends Controller
         $products = ProductResource::collection(Product::paginate(10));
         $categories = CategoryResource::collection(Category::all());
 
-        // Logic to retrieve and return products
         return inertia('Products/Index', [
             'products' => $products,
             'categories' => $categories,
+            'message' => session('message')
         ]);
     }
 
@@ -34,8 +35,11 @@ class ProductController extends Controller
      */
     public function create()
     {
-        // Logic to show product creation form
-        return view('products.create');
+        $categories = CategoryResource::collection(Category::all());
+
+        return inertia('Products/Create', [
+            'categories' => $categories,
+        ]);
     }
 
     /**
@@ -44,10 +48,17 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
-        // Logic to validate and store the new product
-        // Redirect or return response after storing
+        $product = Product::create($request->validated());
+
+        if ($request->has('categories')) {
+            $ids = collect($request->categories)->pluck('id');
+            $product->categories()->sync($ids);
+        }
+
+        return redirect()->route('products.index')
+            ->with('message', 'Producto creado exitosamente.');
     }
 
     /**
@@ -58,8 +69,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        // Logic to retrieve and return a specific product
-        return view('products.show', compact('id'));
+        // TO-DO
     }
 
     /**
@@ -68,10 +78,15 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(int $id)
     {
-        // Logic to show product edit form
-        return view('products.edit', compact('id'));
+        $categories = CategoryResource::collection(Category::all());
+        $product = ProductResource::make(Product::find($id));
+
+        return inertia('Products/Edit', [
+            'product' => $product,
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -81,10 +96,18 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreProductRequest $request, $id)
     {
-        // Logic to validate and update the product
-        // Redirect or return response after updating
+        $product = Product::findOrFail($id);
+        $product->update($request->validated());
+
+        if ($request->has('categories')) {
+            $ids = collect($request->categories)->pluck('id');
+            $product->categories()->sync($ids);
+        }
+
+        return redirect()->route('products.index')
+            ->with('message', 'Producto actualizado exitosamente.');
     }
 
     /**
@@ -95,7 +118,6 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        // Logic to delete the specified product
-        // Redirect or return response after deletion
+        // TO-DO
     }
 }

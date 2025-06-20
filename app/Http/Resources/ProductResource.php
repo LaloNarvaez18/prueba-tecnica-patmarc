@@ -4,6 +4,9 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\CategoryResource;
+use Carbon\Carbon;
+
 
 class ProductResource extends JsonResource
 {
@@ -21,6 +24,7 @@ class ProductResource extends JsonResource
             'price' => $this->price,
             'stock' => $this->stock,
             'image' => $this->image,
+            'expiration_date' => $this->expiration_date ? Carbon::parse($this->expiration_date)->format('d/m/Y') : null,
             'categories' => CategoryResource::collection($this->whenLoaded('categories')),
         ];
     }
