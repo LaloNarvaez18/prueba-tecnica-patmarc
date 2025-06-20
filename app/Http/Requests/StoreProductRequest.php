@@ -36,7 +36,7 @@ class StoreProductRequest extends FormRequest
                 'required_if:hasFoodCategory,true'
             ],
         ];
-        }
+    }
 
     /**
     * Get custom messages for validator errors.

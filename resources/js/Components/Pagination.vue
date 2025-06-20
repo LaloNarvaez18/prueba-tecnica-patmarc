@@ -12,7 +12,7 @@ defineProps({
 const updatePage = (page) => {
     let pageNumber = page.url.split("=")[1];
 
-    router.visit(`/products?page=${pageNumber}`, {
+    router.visit(`?page=${pageNumber}`, {
         preserveState: true,
         preserveScroll: true,
     });
