@@ -223,27 +223,6 @@ Al consultar el endpoint, se debe esperar una respuesta de este tipo:
 }
 ```
 
-## Testing
-
-### Pruebas disponibles
-
-Este proyecto cuenta con pruebas automatizadas para asegurar la correcta funcionalidad del código. Actualmente, se incluyen los siguientes tipos de tests:
-
-- Feature Tests
-- Unit Tests
-
-### Ejecutar pruebas
-
-- Docker
-    ```sh
-    docker-compose exec app php artisan test
-    ```
-
-- Local
-    ```sh
-    php artisan test
-    ```
-
 ## Postman
 
 Se puede importar la colección de `Postman` disponible en el proyecto para probar los endpoints disponibles.
