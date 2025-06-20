@@ -82,7 +82,7 @@ watch(selectedCategories, (newVal) => {
                 <section
                     class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
                     <MultiSelect v-model="selectedCategories" name="filter" :options="categories.data"
-                        optionLabel="name" filter placeholder="Filtrar por categorias"
+                        optionLabel="name" filter placeholder="Filtrar por categorías"
                         class="w-full sm:w-auto md:w-60 flex-1 min-w-0" :maxSelectedLabels="2" />
 
                     <a :href="route('products.create')"

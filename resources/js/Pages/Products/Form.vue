@@ -135,7 +135,7 @@ const toggleExpirationDateRequired = () => {
                                 </InputLabel>
 
                                 <MultiSelect v-model="form.categories" :modelValue="form.categories" name="categories"
-                                    :options="categories" optionLabel="name" filter placeholder="Seleccione categorias"
+                                    :options="categories" optionLabel="name" filter placeholder="Seleccione categorías"
                                     class="w-full block" required @before-hide="toggleExpirationDateRequired()"/>
 
                                 <InputError class="mt-2" :message="form.errors.categories" />

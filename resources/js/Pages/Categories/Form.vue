@@ -44,14 +44,14 @@ const update = () => {
 
             <div class="mb-6 flex items-center justify-between">
                 <section>
-                    <h2 class="text-xl font-semibold text-gray-900">{{ edit ? 'Editar categoria' : 'Agregar nueva categoria' }}</h2>
+                    <h2 class="text-xl font-semibold text-gray-900">{{ edit ? 'Editar categoría' : 'Agregar nueva categoría' }}</h2>
                 </section>
 
                 <section class="flex items-center space-x-4">
                     <a :href="route('categories.index')"
                         class="inline-block text-sm rounded-lg bg-white py-2 px-6 text-gray-600 shadow-md transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 text-center">
                         <i class="bi bi-arrow-left"></i>
-                        Volver a categorias
+                        Volver a categorías
                     </a>
                 </section>
             </div>
@@ -59,8 +59,8 @@ const update = () => {
             <div class="overflow-hidden rounded-lg border shadow-md mb-5 bg-white">
                 <div class="overflow-x-auto px-6 py-6">
                     <section class="mb-7">
-                        <h3 class="text-xl font-bold text-gray-900">Información de la categoria</h3>
-                        <p class="text-md text-gray-700 mt-2">Complete el siguiente formulario para {{ edit ? 'actualizar' : 'crear' }} una categoria.</p>
+                        <h3 class="text-xl font-bold text-gray-900">Información de la categoría</h3>
+                        <p class="text-md text-gray-700 mt-2">Complete el siguiente formulario para {{ edit ? 'actualizar' : 'crear' }} una categoría.</p>
                     </section>
 
                     <hr class="my-8 border-t border-gray-200" />
@@ -69,7 +69,7 @@ const update = () => {
                         <div class="grid grid-cols-1 md:grid-cols-1">
                             <div>
                                 <InputLabel for="name" class="font-extrabold text-md mb-3">
-                                    <i class="bi bi-at"></i> Nombre de la categoria
+                                    <i class="bi bi-at"></i> Nombre de la categoría
                                 </InputLabel>
 
                                 <TextInput id="name" v-model="form.name" type="text" class="mt-1 block w-full"
@@ -95,11 +95,11 @@ const update = () => {
                         <div class="mt-7">
                             <button v-if="category"
                                 class="rounded-lg bg-yellow-400 py-2 px-6 text-black shadow-md transition duration-150 ease-in-out hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 text-center justify-end">
-                                <i class="bi bi-arrow-clockwise"></i> Actualizar categoria
+                                <i class="bi bi-arrow-clockwise"></i> Actualizar categoría
                             </button>
                             <button v-else="category"
                                 class="rounded-lg bg-indigo-500 py-2 px-6 text-white shadow-md transition duration-150 ease-in-out hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 text-center justify-end">
-                                <i class="bi bi-plus-lg"></i> Crear nueva categoria
+                                <i class="bi bi-plus-lg"></i> Crear nueva categoría
                             </button>
                         </div>
                     </form>

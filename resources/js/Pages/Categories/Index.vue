@@ -53,14 +53,14 @@ const deleteCategory = () => {
             <div class="mb-6 flex items-center justify-between">
                 <section>
                     <h2 class="text-xl font-semibold text-gray-900">Categorias</h2>
-                    <p class="text-sm text-gray-600">Listado de todos los categorias</p>
+                    <p class="text-sm text-gray-600">Listado de todos los categorías</p>
                 </section>
 
                 <section class="flex items-center space-x-4">
                     <a :href="route('categories.create')"
                         class="inline-block text-sm rounded-lg bg-indigo-500 py-2 px-6 text-white shadow-md transition duration-150 ease-in-out hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 text-center">
                         <i class="bi bi-plus-lg"></i>
-                        Agregar categoria
+                        Agregar categoría
                     </a>
                 </section>
             </div>
@@ -105,7 +105,7 @@ const deleteCategory = () => {
         </div>
 
         <Modal :show="showDialog" @close="closeDialog">
-            <DeleteDialog :title="'Eliminar categoria'">
+            <DeleteDialog :title="'Eliminar categoría'">
                 <a type="button" @click="deleteCategory"
                     class="inline-flex w-full sm:w-auto justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:mr-3 mb-3 sm:mb-0">
                     <i class="bi bi-trash mr-2"></i>Eliminar

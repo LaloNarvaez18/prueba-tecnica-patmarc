@@ -10,7 +10,7 @@ use App\Http\Requests\StoreCategoryRequest;
 class CategoryController extends Controller
 {
     /**
-    * Muestra una lista de los categorias.
+    * Muestra una lista de los categorías.
      *
      * @return \Illuminate\Http\Response
      */
@@ -48,7 +48,7 @@ class CategoryController extends Controller
     }
 
     /**
-    * Muestra la categoria especificada.
+    * Muestra la categoría especificada.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
