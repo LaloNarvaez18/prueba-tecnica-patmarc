@@ -36,10 +36,10 @@ onBeforeUnmount(() => {
 
 <template>
     <div v-if="message && active" class="mb-4 font-medium text-sm text-green-500">
-        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-7" role="alert">
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-7">
             <span class="block sm:inline">
                 <i class="bi bi-check-circle mr-2"></i>{{ message }}
-                <i class="bi bi-x-lg float-end cursor-pointer" @click="closeAlert"></i>
+                <i class="bi bi-x-lg float-end cursor-pointer" @click="closeAlert()"></i>
             </span>
         </div>
     </div>

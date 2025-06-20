@@ -26,9 +26,8 @@ const submit = () => {
         <Head title="Forgot Password" />
 
         <div class="mb-4 text-sm text-gray-600">
-            Forgot your password? No problem. Just let us know your email
-            address and we will email you a password reset link that will allow
-            you to choose a new one.
+            <h1 class="text-2xl font-bold text-gray-900 mb-4">Recuperar contraseña</h1>
+            ¿Olvidaste tu contraseña? No hay problema. Simplemente indícanos tu dirección de correo electrónico y te enviaremos un enlace para restablecer tu contraseña, que te permitirá elegir una nueva.
         </div>
 
         <div
@@ -40,7 +39,9 @@ const submit = () => {
 
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="email" value="Email" />
+                <InputLabel for="email">
+                    <i class="bi bi-at"></i> Correo electrónico
+                </InputLabel>
 
                 <TextInput
                     id="email"
@@ -56,12 +57,14 @@ const submit = () => {
             </div>
 
             <div class="mt-4 flex items-center justify-end">
-                <PrimaryButton
+                <button
+                    type="submit"
+                    class="middle none center w-full rounded-lg bg-indigo-500 py-2 px-6 text-white shadow-md transition duration-150 ease-in-out hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 text-center"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
-                    Email Password Reset Link
-                </PrimaryButton>
+                    Enviar enlace para recuperar contraseña
+                </button>
             </div>
         </form>
     </GuestLayout>

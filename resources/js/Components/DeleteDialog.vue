@@ -19,7 +19,7 @@ defineProps({
             </h3>
             <div class="mt-2 mb-6">
                 <p class="text-sm text-gray-500">¿Estás seguro que deseas eliminar este elemento?
-                    Ten presente que toda la información se borrará permanentemente y esta acción no se
+                    Tenga presente que toda la información se borrará permanentemente y esta acción no se
                     puede deshacer.</p>
             </div>
 

@@ -37,7 +37,9 @@ const submit = () => {
 
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="email" value="Email" />
+                <InputLabel for="email">
+                    <i class="bi bi-at"></i> Correo electrónico
+                </InputLabel>
 
                 <TextInput
                     id="email"
@@ -53,7 +55,9 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <InputLabel for="password" value="Password" />
+                <InputLabel for="password">
+                    <i class="bi bi-lock"></i> Contraseña
+                </InputLabel>
 
                 <TextInput
                     id="password"
@@ -68,10 +72,9 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <InputLabel
-                    for="password_confirmation"
-                    value="Confirm Password"
-                />
+                <InputLabel for="password_confirmation">
+                    <i class="bi bi-lock"></i> Confirmar contraseña
+                </InputLabel>
 
                 <TextInput
                     id="password_confirmation"
@@ -89,12 +92,14 @@ const submit = () => {
             </div>
 
             <div class="mt-4 flex items-center justify-end">
-                <PrimaryButton
+                <button
+                    type="submit"
+                    class="middle none center w-full rounded-lg bg-indigo-500 py-2 px-6 text-white shadow-md transition duration-150 ease-in-out hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 text-center"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
-                    Reset Password
-                </PrimaryButton>
+                    Reestablecer contraseña
+                </button>
             </div>
         </form>
     </GuestLayout>
